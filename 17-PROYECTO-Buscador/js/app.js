@@ -25,7 +25,7 @@ const datosbusqueda = {
 document.addEventListener('DOMContentLoaded', ()=>{
     mostrarAutos(autos); //MUESTRA AUTOMOVILES
     // LLENAR OPCIONES DE ANIOS
-    llenarSelect();
+    CargarYear();
 });
 // EVENT LISTENER PARA LOS SELECT DE BUSQUEDA
 marca.addEventListener('change', AgregarValores);
@@ -57,7 +57,7 @@ function LimpiarHTML(){
     }
 }
 // GENERA LOS ANIOS DEL SELECT
-function llenarSelect(){
+function CargarYear(){
     for (let index = max ; index >= min ; index--) {
         //OPTION ES PARA LAS OPCIONES EN EL SELECT HTML AGREGAMOS UN VALUE Y UN TEXTCONTENT
         const opcion = document.createElement('option');
@@ -89,6 +89,12 @@ function noResultado(){
     noResultado.classList.add('alerta', 'error');
     noResultado.textContent = 'No hay resultados, intenta con otros terminos';
     resultados.appendChild(noResultado);
+    //ALERTA 
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops',
+        text: 'Auto no encontrado realize otra busqueda'
+    });
 }
 function filtrarMarca(auto){
     const {marca} = datosbusqueda;
