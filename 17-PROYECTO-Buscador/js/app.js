@@ -75,8 +75,7 @@ function AgregarValores(e){
 function filtrarAuto(){
     //FUNCIONES DE ALTO NIVEL
     // filter de autos es como un foreach y revisa cada uno por eso podemos enviarle auto a la otra funcion
-    // const resultado = autos.filter(filtrarMarca).filter(filtrarYear).filter(filtrarMinimo).filter(filtrarMaximo).filter(filtrarPuertas).filter(filtrarTransmision).filter(filtrarColor);
-    const resultado = autos.filter(filtroHandler);
+    const resultado = autos.filter(filtrarMarca).filter(filtrarYear).filter(filtrarMinimo).filter(filtrarMaximo).filter(filtrarPuertas).filter(filtrarTransmision).filter(filtrarColor);
     if(resultado.length){
         mostrarAutos(resultado);
     } else {
@@ -90,24 +89,6 @@ function noResultado(){
     noResultado.classList.add('alerta', 'error');
     noResultado.textContent = 'No hay resultados, intenta con otros terminos';
     resultados.appendChild(noResultado);
-    //ALERTA 
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops',
-        text: 'Auto no encontrado realize otra busqueda'
-    });
-}
-function filtroHandler( auto ){
-    const {marca, year, minimo, maximo, puertas, transmision,color } = datosbusqueda;
-    return (
-            (marca === '' || auto.marca ===marca) &&
-            (year === '' || auto.marca ===marca) &&
-            (minimo === '' || auto.precio >= minimo) &&
-            (maximo ==='' || auto.precio <= maximo) &&
-            (puertas ==='' || auto.puertas == puertas) &&
-            (transmision ==='' || auto.transmision ===transmision) &&
-            (color ==='' || auto.color===color)
-        )
 }
 function filtrarMarca(auto){
     const {marca} = datosbusqueda;
