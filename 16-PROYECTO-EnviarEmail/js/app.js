@@ -2,10 +2,12 @@ document.addEventListener('DOMContentLoaded', function(){
     //SELECCIONAR ELEMENTOS DE LA INTERFAZ
     const emailcompleto = {
         email : '',
+        cc : 'default',
         asunto: '',
         mensaje: ''
     };
     const email = document.querySelector('#email');
+    const cc = document.querySelector('#cc');
     const asunto = document.querySelector('#asunto');
     const mensaje = document.querySelector('#mensaje');
     const formulario = document.querySelector('#formulario');
@@ -13,15 +15,17 @@ document.addEventListener('DOMContentLoaded', function(){
     const btnReset = document.querySelector('#formulario button[type="reset"]');
     const spinner = document.querySelector("#spinner");
     //ASIGNAR EVENTOS BLUR SALIENDO DEL CAMPO, INPUT TIEMPO REAL
-    email.addEventListener('input', ValidarCampo);
-    asunto.addEventListener('input', ValidarCampo); 
-    mensaje.addEventListener('input', ValidarCampo);
+    email.addEventListener('blur', ValidarCampo);
+    cc.addEventListener('input', ValidarCampo);
+    asunto.addEventListener('blur', ValidarCampo); 
+    mensaje.addEventListener('blur', ValidarCampo);    
     formulario.addEventListener('submit', enviarEmail);
     btnReset.addEventListener('click', e => {
         e.preventDefault();
         resetFormulario();
 
     });
+
     function enviarEmail(e){
         e.preventDefault();
         spinner.classList.add("flex");
@@ -49,14 +53,14 @@ document.addEventListener('DOMContentLoaded', function(){
         //nextElementSibling = recorrer el dom al hermano.
         const padre = e.target.parentElement;
         // trim = desaparece los espacios
-        if ( e.target.value.trim() === ""){
+        if ( e.target.value.trim() === "" && e.target.id !== "cc"){
             emailcompleto[e.target.id] = "";
             VerificarEmaillleno();
             const nombre = e.target.id;            
             mostraralerta(`El espacio ${nombre} esta vacio`, padre);
             return;  
         }
-        if(e.target.id === "email" && !ComprobarEmail(e.target.value)){
+        if((e.target.id === "email" || e.target.id === "cc") && !ComprobarEmail(e.target.value)){
             emailcompleto[e.target.id] = "";
             VerificarEmaillleno();
             mostraralerta('El email es incorrecto', padre);
