@@ -15,6 +15,10 @@ function cargarEventListeners(){
         articuloscarrito = [];
         limpiarHTML();
     });
+    document.addEventListener('DOMContentLoaded', ()=>{
+        articuloscarrito =  JSON.parse(localStorage.getItem('carrito')) || [];
+        carritoHTML();
+    })
 }
 
 //FUNCIONES 
@@ -104,12 +108,24 @@ function carritoHTML (e) {
         contenedorCarrito.appendChild(row);
     });
     const row1 = document.createElement('p');
-    row1.innerHTML = `
+    if(e){
+        row1.innerHTML = `
         <p> El precio total es: ${e} </p>
-    `;
-    totalCarrito.appendChild(row1);
-}
+        `;
+    }else {
+        row1.innerHTML = `
+        <p> El precio total es: 0 </p>
+        `;  
+    }
 
+    
+    totalCarrito.appendChild(row1);
+    //AGREGAR CARRITO DE COMPRAS AL STORAGE
+    sincronizarStorage();
+}
+function sincronizarStorage(){
+    localStorage.setItem('carrito', JSON.stringify(articuloscarrito));
+}
 //eliminar los cursos del table body
 function limpiarHTML(){
     //forma lenta
