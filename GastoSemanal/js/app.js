@@ -115,14 +115,20 @@ let presupuesto;
 //FUNCIONES
 
 function preguntarPresupuesto(){
-    const presupuestoUsuario= prompt('Cual es tu presupuesto?');
-    console.log(presupuestoUsuario);
-    // IS NAN DETERMINA SINO ES UN NUMERO
-    if(presupuestoUsuario === "" || presupuestoUsuario === null || isNaN(presupuestoUsuario) || preguntarPresupuesto< 0){
+    const presupuestoUsuario = prompt('¿Cual es tu presupuesto?');
+
+    if( presupuestoUsuario === '' || presupuestoUsuario === null || isNaN(presupuestoUsuario) || presupuestoUsuario <= 0 ) {
         window.location.reload();
     }
+
+    // Presupuesto valido
     presupuesto = new Presupuesto(presupuestoUsuario);
-    ui.insertarpresupuesto(presupuesto);
+
+    // console.log(presupuesto);
+
+    // Agregarlo en el HTML
+    ui.insertarpresupuesto(presupuesto)
+    
 }
 function validarGasto(e){
     e.preventDefault();
