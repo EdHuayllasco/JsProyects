@@ -1,7 +1,7 @@
 ## Despliegue del proyecto base en: 
 
-
+[Gasto-semanalBase](https://gastobase.netlify.app/)
 
 ## Despliegue del proyecto mejorado en: 
 
-[Gasto-semanalBase](https://gasto-mejorado.netlify.app/)
+[Gasto-semanalMejorado](https://gasto-mejorado.netlify.app/)
